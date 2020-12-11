@@ -85,9 +85,33 @@ const Board = () => {
     getPageData(pageNum); // 동일
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isCheckChangeBoard:false
+    };
+  };
+
+  isChangeBoardName = ()=> {
+    this.setState({ isCheckChangeBoard: !this.state.isCheckChangeBoard });
+  };
+
   return (
     <div className="wrapper table_wrapper">
       <div className="column"></div>
+      <div style="margin:10px;">
+        <button
+          data-toggle="collapse"
+          href="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          Click
+        </button>
+      </div>
+      <div class="collapse" id="collapseExample">
+        <div class="well">hello world</div>
+      </div>
       <DataTable
         style={{
           height: "auto",
@@ -112,12 +136,16 @@ const Board = () => {
           <DataTableBody>
             {state.map((v, i) => (
               <DataTableRow key={i + 1123}>
-                <DataTableCell>{i + 1}</DataTableCell>
+                {/* 게시물 번호 */}
                 <DataTableCell>{v[0]}</DataTableCell>
+                {/* 게시자 */}
                 <DataTableCell>{v[1]}</DataTableCell>
-                <DataTableCell>
-                  <a href={`/detail/${i + 1}`}>{v[2]}</a>
-                </DataTableCell>
+                {/* 제목 */}
+                <DataTableCell onClick={this.isChangeBoardName}>{v[2]}</DataTableCell>
+                {/* 작성일 */}
+                <DataTableCell>{v[4]}</DataTableCell>
+                {/* 내용 */}
+
                 <DataTableCell>{v[3]}</DataTableCell>
               </DataTableRow>
             ))}
