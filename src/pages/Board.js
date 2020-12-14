@@ -85,68 +85,48 @@ const Board = () => {
     getPageData(pageNum); // 동일
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCheckChangeBoard:false
-    };
-  };
+  const [isOpened, setIsOpened] = useState(false);
 
-  isChangeBoardName = ()=> {
-    this.setState({ isCheckChangeBoard: !this.state.isCheckChangeBoard });
-  };
+  function toggle() {
+    setIsOpened((wasOpened) => !wasOpened);
+  }
 
   return (
     <div className="wrapper table_wrapper">
       <div className="column"></div>
-      <div style="margin:10px;">
-        <button
-          data-toggle="collapse"
-          href="#collapseExample"
-          aria-expanded="false"
-          aria-controls="collapseExample"
-        >
-          Click
-        </button>
-      </div>
-      <div class="collapse" id="collapseExample">
-        <div class="well">hello world</div>
-      </div>
       <DataTable
         style={{
           height: "auto",
-          width: "auto",
-          maxHeight: "1000px",
-          minWidth: "375px",
+          width: "500px",
+          maxwidth: "500px",
+          maxHeight: "700px",
           margin: "0px",
         }}
         stickyRows={rows}
         stickyColumns={cols}
       >
         <DataTableContent>
-          <DataTableHead>
-            <DataTableRow>
-              <DataTableHeadCell>No</DataTableHeadCell>
-              <DataTableHeadCell>게시자</DataTableHeadCell>
-              <DataTableHeadCell>제목</DataTableHeadCell>
-              <DataTableHeadCell>내용</DataTableHeadCell>
-              <DataTableHeadCell>작성일</DataTableHeadCell>
-            </DataTableRow>
-          </DataTableHead>
           <DataTableBody>
             {state.map((v, i) => (
               <DataTableRow key={i + 1123}>
-                {/* 게시물 번호 */}
-                <DataTableCell>{v[0]}</DataTableCell>
-                {/* 게시자 */}
-                <DataTableCell>{v[1]}</DataTableCell>
-                {/* 제목 */}
-                <DataTableCell onClick={this.isChangeBoardName}>{v[2]}</DataTableCell>
-                {/* 작성일 */}
-                <DataTableCell>{v[4]}</DataTableCell>
-                {/* 내용 */}
-
-                <DataTableCell>{v[3]}</DataTableCell>
+                <div className="boardconst" onClick={toggle}>
+                  {/* 게시물 번호 */}
+                  <DataTableCell>{v[0]}</DataTableCell>
+                  {/* 게시자 */}
+                  <DataTableCell>{v[1]}</DataTableCell>
+                  {/* 제목 */}
+                  <DataTableCell>{v[2]}</DataTableCell>
+                  {/* 작성일 */}
+                  <DataTableCell>{v[4]}</DataTableCell>
+                </div>
+                <hr></hr>
+                {isOpened && (
+                  <div className="boardcontent">
+                    <pre>
+                      <DataTableCell>{v[3]}</DataTableCell>
+                    </pre>
+                  </div>
+                )}
               </DataTableRow>
             ))}
           </DataTableBody>

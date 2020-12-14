@@ -12,6 +12,9 @@
 	<link href="css/all.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
+  <style type="text/css">
+    .hidden { display:none; }
+    </style>
   </head>
   <body>
     <!--컨텍트 전체입니다.-->
@@ -23,6 +26,7 @@
           <img src="images/logo15 copy.png" height="50px" >
           <a href="http://localhost:3000/"  class="flex flex-column items-center justify-center color-inherit w-100 pa2 br2 br--top no-underline hover-bg-blue4 hover-white"   style="color: #EF746F;" >
             &nbsp;공지사항
+          </a>
           </section>
         </h1>
           <br>
@@ -35,5 +39,33 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
   </body>
+  <script type="text/javascript">
+  var button = document.getElementById('button');
+    button.onclick = function() {
+      var div = document.getElementById('newpost');
+      if (div.style.display !== 'none') {
+          div.style.display = 'none';
+      }
+      else {
+          div.style.display = 'block';
+      }
+    };
+    jQuery(document).ready(function(){
+    jQuery('#hideshow').live('click', function(event) {        
+         jQuery('#content').toggle('show');
+    });
+});
+jQuery(document).ready(function(){
+    jQuery('#hideshow').on('click', function(event) {        
+        jQuery('#content').toggle('show');
+    });
+});
+
+$("#button").click(function() { 
+    // assumes element with id='button'
+    $("#newpost").toggle();
+});
+    </script>
 </html>
